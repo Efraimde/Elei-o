@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eleição 2050</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        #candidate-image {
+            display: none;
+            margin-top: 15px;
+            max-width: 100%;
+            height: auto;
+        }
+        #urna {
+            width: 300px;
+            border: 2px solid #fff;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body class="bg-dark text-white text-center">
+    <h1>Eleição 2050</h1>
+    <p>Digite seu voto para Prefeito</p>
+    <div id="urna" class="mx-auto">
+        <input type="text" id="numero-digitado" class="form-control text-center" readonly>
+        <img id="candidate-image" src="Efraim de oliveira.png" alt="Efraim de Oliveira">
+        <h3 id="candidate-name"></h3>
+    </div>
+    <div class="mt-3">
+        <button class="btn btn-secondary" onclick="adicionarNumero(1)">1</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(2)">2</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(3)">3</button><br>
+        <button class="btn btn-secondary" onclick="adicionarNumero(4)">4</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(5)">5</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(6)">6</button><br>
+        <button class="btn btn-secondary" onclick="adicionarNumero(7)">7</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(8)">8</button>
+        <button class="btn btn-secondary" onclick="adicionarNumero(9)">9</button><br>
+        <button class="btn btn-secondary" onclick="adicionarNumero(0)">0</button>
+    </div>
+    <div class="mt-3">
+        <button class="btn btn-light" onclick="corrigirVoto()">Corrige</button>
+        <button class="btn btn-warning" onclick="votarBranco()">Branco</button>
+        <button class="btn btn-success" onclick="confirmarVoto()">Confirma</button>
+    </div>
+
+    <script>
+        function adicionarNumero(numero) {
+            const campoNumero = document.getElementById('numero-digitado');
+            if (campoNumero.value.length < 2) {
+                campoNumero.value += numero;
+            }
+        }
+
+        function corrigirVoto() {
+            document.getElementById('numero-digitado').value = '';
+            document.getElementById('candidate-name').innerText = '';
+            document.getElementById('candidate-image').style.display = 'none'; // Esconder a imagem
+        }
+
+        function votarBranco() {
+            document.getElementById('numero-digitado').value = 'BR';
+            document.getElementById('candidate-name').innerText = 'Voto em Branco';
+            document.getElementById('candidate-image').style.display = 'none'; // Esconder a imagem
+        }
+
+        function confirmarVoto() {
+            const numero = document.getElementById('numero-digitado').value;
+            const candidateName = document.getElementById('candidate-name');
+            const candidateImage = document.getElementById('candidate-image');
+
+            if (numero === '00') {
+                candidateName.innerText = 'Efraim de Oliveira - Prefeito';
+                candidateImage.src = 'Efraim de oliveira.png';
+                candidateImage.style.display = 'block'; // Exibir a imagem
+            } else {
+                candidateName.innerText = 'Candidato Desconhecido';
+                candidateImage.style.display = 'none'; // Esconder a imagem
+            }
+
+            // Tocar som da urna
+            const urnaSound = new Audio('som-de-urna-eletronica.mp3');
+            urnaSound.play();
+        }
+    </script>
+</body>
+</html>
+
+
+
+       
+           
